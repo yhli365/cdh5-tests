@@ -63,6 +63,7 @@
 			<id>cloudera-repo</id>
 			<name>Clodera Repository</name>
 			<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+			<!-- @site: http://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_vd_cdh5_maven_repo.html -->
 		</repository>
 
 	</repositories>
@@ -81,6 +82,13 @@
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-client</artifactId>
 			<version>${hadoop.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-mapreduce-client-jobclient</artifactId>
+			<version>${hadoop.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
 		</dependency>
 		<!-- dependencies @commons -->
 		<dependency>
