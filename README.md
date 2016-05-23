@@ -14,6 +14,11 @@ Maven
 Hadoop
 =============================
 * hadoop-mapreduce-client-jobclient-tests.txt
+
 	hadoop-mapreduce-client-jobclient-*-test-sources.jar
+	
 * hadoop-mapreduce-examples.txt
+
 	hadoop-mapreduce-examples-*-sources.jar
+
+	
