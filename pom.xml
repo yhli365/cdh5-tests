@@ -26,56 +26,6 @@
 		<maven>3.0.0</maven>
 	</prerequisites>
 
-	<repositories>
-		<!-- This should be at top, it makes maven try the central repo first and 
-			then others and hence faster dep resolution -->
-		<repository>
-			<id>central-mirror</id>
-			<name>OSChina Central</name>
-			<url>http://maven.oschina.net/content/groups/public/</url>
-		</repository>
-
-		<repository>
-			<id>central</id>
-			<name>Maven Repository</name>
-			<url>https://repo1.maven.org/maven2</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
-		<repository>
-			<id>apache-repo</id>
-			<name>Apache Repository</name>
-			<url>https://repository.apache.org/content/repositories/releases</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
-		<repository>
-			<id>cloudera-repo</id>
-			<name>Clodera Repository</name>
-			<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-			<!-- @site: http://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_vd_cdh5_maven_repo.html -->
-		</repository>
-
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>plugin-central-mirror</id>
-			<name>OSChina Central</name>
-			<url>http://maven.oschina.net/content/groups/public/</url>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<dependencies>
 		<!-- dependencies @cdh -->
 		<dependency>
@@ -199,4 +149,55 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<repositories>
+		<!-- This should be at top, it makes maven try the central repo first and 
+			then others and hence faster dep resolution -->
+		<repository>
+			<id>central-mirror</id>
+			<name>OSChina Central</name>
+			<url>http://maven.oschina.net/content/groups/public/</url>
+		</repository>
+
+		<repository>
+			<id>central</id>
+			<name>Maven Repository</name>
+			<url>https://repo1.maven.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>apache-repo</id>
+			<name>Apache Repository</name>
+			<url>https://repository.apache.org/content/repositories/releases</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>cloudera-repo</id>
+			<name>Clodera Repository</name>
+			<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+			<!-- @site: http://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_vd_cdh5_maven_repo.html -->
+		</repository>
+
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>plugin-central-mirror</id>
+			<name>OSChina Central</name>
+			<url>http://maven.oschina.net/content/groups/public/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 </project>
