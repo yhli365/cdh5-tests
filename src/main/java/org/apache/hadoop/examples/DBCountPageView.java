@@ -27,7 +27,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Iterator;
 import java.util.Random;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +48,7 @@ import org.apache.hadoop.mapreduce.lib.reduce.LongSumReducer;
 import org.apache.hadoop.util.StringUtils;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-import org.hsqldb.server.Server;
+import org.hsqldb.Server;
 
 /**
  * This is a demonstrative program, which uses DBInputFormat for reading
