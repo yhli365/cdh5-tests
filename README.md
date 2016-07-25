@@ -21,4 +21,10 @@ Hadoop
 
 	hadoop-mapreduce-examples-*-sources.jar
 
-	
+
+HBase
+=============================
+1. hbase-examples.txt
+
+	hbase-examples-*-sources.jar
+
