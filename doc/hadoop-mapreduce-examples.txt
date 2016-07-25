@@ -6,10 +6,28 @@ $ ln -s ~/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0-cdh5.7.0
 $ hadoop jar hadoop-mapreduce-examples.jar
 org.apache.hadoop.examples.ExampleDriver
 
---wordcount
+
+单词统计相关作业
+=============================
+--wordcount(单词计数)
 $ hdfs dfs -mkdir -p examples/wordcount/input
 $ hdfs dfs -put ~/hadoop/etc/hadoop/*.xml examples/wordcount/input
 $ hdfs dfs -ls examples/wordcount/input
 $ hadoop jar hadoop-mapreduce-examples.jar wordcount examples/wordcount/input examples/wordcount/output
 $ hdfs dfs -text examples/wordcount/output/part-r-* | more
+
+--wordmean(单词长度均值)
+$ hadoop jar hadoop-mapreduce-examples.jar wordmean examples/wordcount/input examples/wordmean/output
+$ hdfs dfs -text examples/wordmean/output/part-r-* | more
+
+--wordmedian(单词长度中值)
+$ hadoop jar hadoop-mapreduce-examples.jar wordmedian examples/wordcount/input examples/wordmedian/output
+$ hdfs dfs -text examples/wordmedian/output/part-r-* | more
+
+--wordstandarddeviation(单词长度标准偏差)
+$ hadoop jar hadoop-mapreduce-examples.jar wordstandarddeviation examples/wordcount/input examples/wordstandarddeviation/output
+$ hdfs dfs -text examples/wordstandarddeviation/output/part-r-* | more
+
+--aggregatewordcount
+
 
