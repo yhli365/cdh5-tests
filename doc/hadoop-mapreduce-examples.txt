@@ -1,0 +1,15 @@
+
+准备
+=============================
+$ mkdir ~/test
+$ ln -s ~/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0-cdh5.7.0.jar ~/test/hadoop-mapreduce-examples.jar
+$ hadoop jar hadoop-mapreduce-examples.jar
+org.apache.hadoop.examples.ExampleDriver
+
+--wordcount
+$ hdfs dfs -mkdir -p examples/wordcount/input
+$ hdfs dfs -put ~/hadoop/etc/hadoop/*.xml examples/wordcount/input
+$ hdfs dfs -ls examples/wordcount/input
+$ hadoop jar hadoop-mapreduce-examples.jar wordcount examples/wordcount/input examples/wordcount/output
+$ hdfs dfs -text examples/wordcount/output/part-r-* | more
+
