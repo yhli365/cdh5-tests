@@ -28,6 +28,56 @@ $ hdfs dfs -text examples/wordmedian/output/part-r-* | more
 $ hadoop jar hadoop-mapreduce-examples.jar wordstandarddeviation examples/wordcount/input examples/wordstandarddeviation/output
 $ hdfs dfs -text examples/wordstandarddeviation/output/part-r-* | more
 
---aggregatewordcount
+--aggregatewordcount(聚合框架单词计数)
+$ hadoop jar hadoop-mapreduce-examples.jar aggregatewordcount examples/wordcount/input examples/aggregatewordcount/output 1 textinputformat
+$ hdfs dfs -text examples/aggregatewordcount/output/part-r-* | more
+>>>bug：ValueAggregatorJobBase#getAggregatorDescriptors和ValueAggregatorJob#setAggregatorDescriptors中参数设置不匹配。
 
+--aggregatewordhist(聚合框架单词直方图)
+$ hadoop jar hadoop-mapreduce-examples.jar aggregatewordhist examples/wordcount/input examples/aggregatewordhist/output 1 textinputformat
+$ hdfs dfs -text examples/aggregatewordhist/output/part-r-* | more
+>>>bug：同上
+
+--grep(正则查找)
+$ hadoop jar hadoop-mapreduce-examples.jar grep examples/wordcount/input examples/grep/output compression
+$ hdfs dfs -text examples/grep/output/part-r-* | more
+
+
+数据读写相关作业
+=============================
+--randomwriter(MAP随机写二进制数据)
+$ hadoop jar hadoop-mapreduce-examples.jar randomwriter \
+  -Dmapreduce.randomwriter.mapsperhost=3 \
+  -Dmapreduce.randomwriter.bytespermap=10485760 \
+  -Dmapreduce.randomwriter.minkey=10 \
+  -Dmapreduce.randomwriter.maxkey=100 \
+  -Dmapreduce.randomwriter.minvalue=0 \
+  -Dmapreduce.randomwriter.maxvalue=2000 \
+  examples/randomwriter/output
+$ hdfs dfs -ls examples/randomwriter/output
+
+--randomtextwriter(MAP随机写文本数据)
+$ hadoop jar hadoop-mapreduce-examples.jar randomtextwriter \
+  -Dmapreduce.randomtextwriter.totalbytes=104857600 \
+  -Dmapreduce.randomtextwriter.bytespermap=10485760 \
+  -Dmapreduce.randomtextwriter.minwordskey=5 \
+  -Dmapreduce.randomtextwriter.maxwordskey=10 \
+  -Dmapreduce.randomtextwriter.minwordsvalue=20 \
+  -Dmapreduce.randomtextwriter.maxwordsvalue=100 \
+  examples/randomtextwriter/output
+$ hdfs dfs -ls examples/randomtextwriter/output
+$ hdfs dfs -text examples/randomtextwriter/output/part-m-00001 | more
+
+--sort(排序:分区|全局)
+$ hadoop jar hadoop-mapreduce-examples.jar sort \
+  -r 3 \
+  -inFormat org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat \
+  -outFormat org.apache.hadoop.mapreduce.lib.output.TextOutputFormat \
+  -outKey org.apache.hadoop.io.Text \
+  -outValue org.apache.hadoop.io.Text \
+  examples/randomtextwriter/output \
+  examples/sort/output
+$ hdfs dfs -ls examples/sort/output
+$ hdfs dfs -text examples/sort/output/part-r-00001 | more
+>>>bug: 参数设置为"-totalOrder 0.7 120 9999"时作业执行报错，全局预分区文件读取失败。
 
