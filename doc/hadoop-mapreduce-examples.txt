@@ -81,3 +81,75 @@ $ hdfs dfs -ls examples/sort/output
 $ hdfs dfs -text examples/sort/output/part-r-00001 | more
 >>>bug: 参数设置为"-totalOrder 0.7 120 9999"时作业执行报错，全局预分区文件读取失败。
 
+
+算法
+=============================
+--*pi(PI值: quasi-Monte Carlo method/蒙特卡罗算法)
+$ hadoop jar hadoop-mapreduce-examples.jar pi 5 3
+
+--*bbp(PI值: Bailey-Borwein-Plouffe/贝利－波尔温－普劳夫公式)
+$ hadoop jar hadoop-mapreduce-examples.jar bbp 3 4 5 examples/bbp/output
+$ hdfs dfs -ls examples/bbp/output
+
+--*distbbp(PI值)
+
+--*pentomino(五格拼板)
+
+--secondarysort(二次排序)
+$ vi /tmp/sort1.txt
+20 21
+50 51
+50 52
+60 51
+60 53
+
+$ vi /tmp/sort2.txt
+1 2
+30 9
+30 6
+60 52
+
+$ hdfs dfs -mkdir -p examples/secondarysort/input
+$ hdfs dfs -put /tmp/sort*.txt examples/secondarysort/input
+$ hadoop jar hadoop-mapreduce-examples.jar secondarysort examples/secondarysort/input examples/secondarysort/output
+$ hdfs dfs -text examples/secondarysort/output/part-r-* | more
+
+--*sudoku(数独，九宫格游戏)
+
+--*join(连接)
+
+--multifilewc(小文件合并MAP)
+$ hdfs dfs -ls examples/wordcount/input
+$ hadoop jar hadoop-mapreduce-examples.jar multifilewc \
+  -Dmapreduce.input.fileinputformat.split.maxsize=9000 \
+  examples/wordcount/input \
+  examples/multifilewc/output
+$ hdfs dfs -text examples/multifilewc/output/part-r-* | more
+
+--dbcount(数据库表记录数统计)
+$ export HADOOP_CLASSPATH=lib/mysql-connector-java-5.1.38-bin.jar
+$ hadoop jar hadoop-mapreduce-examples.jar dbcount \
+  -libjars lib/mysql-connector-java-5.1.38-bin.jar \
+  com.mysql.jdbc.Driver \
+  'jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=UTF-8&user=root&password=root'
+$ mysql -uroot -proot demo -e 'SELECT COUNT(*) FROM Access'
+$ mysql -uroot -proot demo -e 'SELECT SUM(pageview) FROM Pageview'
+
+
+排序
+=============================
+--teragen(数据生成)
+$ hadoop jar hadoop-mapreduce-examples.jar teragen 30k examples/teragen/output
+$ hdfs dfs -ls examples/teragen/output
+
+--terasort(数据排序)
+$ hadoop jar hadoop-mapreduce-examples.jar terasort \
+  -Dmapreduce.job.reduces=3 \
+  examples/teragen/output \
+  examples/terasort/output
+$ hdfs dfs -ls examples/terasort/output
+
+--teravalidate(结果验证)
+$ hadoop jar hadoop-mapreduce-examples.jar teravalidate examples/terasort/output examples/teravalidate/output
+$ hdfs dfs -ls examples/teravalidate/output
+$ hdfs dfs -text examples/teravalidate/output/part-r-00000 | more
