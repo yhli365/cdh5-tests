@@ -13,7 +13,7 @@
 		<hadoop.version>2.6.0-cdh5.7.0</hadoop.version>
 		<hbase.version>1.2.0-cdh5.7.0</hbase.version>
 		<!-- dependencies @apache -->
-		<solr.version>5.3.1</solr.version>
+		<solr.version>8.4.0</solr.version>
 		<!-- dependencies @utils -->
 		<slf4j.version>1.7.13</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
